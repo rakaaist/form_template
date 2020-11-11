@@ -40,7 +40,7 @@ function validate_age(int $field_value, array &$field): bool {
  * Function checks whether there are 2 words provided
  *
  * @param string $field_value - input value
- * @param array $field
+ * @param array $field - input array
  * @return bool
  */
 function validate_full_name(string $field_value, array &$field): bool {
@@ -51,3 +51,37 @@ function validate_full_name(string $field_value, array &$field): bool {
 
     return true;
 }
+
+/**
+ * Function checks number iput according to min and max parameters from the array
+ *
+ * @param int $field_value - input value
+ * @param array $field - input array
+ * @param array $params
+ * @return bool
+ */
+function validate_field_range (int $field_value, array &$field, array $params): bool {
+    if ($field_value < $params['min'] || $field_value > $params['max']) {
+        $field['error'] = 'Number is not in range';
+        return false;
+    }
+
+    return true;
+}
+
+///**
+// * Function checks number to be between 50 and 100
+// *
+// * @param int $field_value - input value
+// * @param array $field - input array
+// * @return bool
+// */
+//function validate_field_num_50_100 (int $field_value, array &$field): bool {
+//    if ($field_value < 50 || $field_value > 100) {
+//        $field['error'] = 'Number has to be between 100 and 200';
+//        return false;
+//    }
+//
+//    return true;
+//}
+

@@ -29,8 +29,12 @@ function get_clean_input(array $form): ?array
 function validate_form(array &$form, array $form_values): bool{
     $is_valid = true;
     foreach ($form['fields'] as $field_id => &$field) {
-        foreach ($field['validators'] ?? [] as $function) {
-            $field_is_valid = $function($form_values[$field_id], $field);
+        foreach ($field['validators'] ?? [] as $function_name => $function) {
+            if (is_array($function)) {
+                $field_is_valid = $function_name($form_values[$field_id], $field, $function);
+            } else {
+                $field_is_valid = $function($form_values[$field_id], $field);
+            }
 
             if (!$field_is_valid) {
                 $is_valid = false;

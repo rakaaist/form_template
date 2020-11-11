@@ -7,42 +7,33 @@ $form = [
         'method' => 'POST'
     ],
     'fields' => [
-        'full_name' => [
-            'label' => '',
-            'type' => 'text',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_full_name'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Vardas ir pavarde',
-                ]
-            ]
-        ],
-        'age' => [
-            'label' => '',
+        'number_1' => [
+            'label' => 'Type number between 100 and 200',
             'type' => 'number',
             'validators' => [
                 'validate_field_not_empty',
-                'validate_age'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Amzius',
+                'validate_field_range' => [
+                    'min' => 100,
+                    'max' => 200
+                ]
+            ]
+        ],
+        'number_2' => [
+            'label' => 'Type number between 50 and 100',
+            'type' => 'number',
+            'validators' => [
+                'validate_field_not_empty',
+                'validate_field_range' => [
+                    'min' => 50,
+                    'max' => 100
                 ]
             ]
         ]
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Ar aš normalus?',
+            'title' => 'Ar skiriu skaičius',
             'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
         ]
     ]
 ];
@@ -50,12 +41,14 @@ $form = [
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-    $sucess = validate_form($form, $clean_inputs);
+    $success = validate_form($form, $clean_inputs);
 
-    if ($sucess) {
-        var_dump('success');
+    if ($success) {
+        $conclusion = 'Success!';
+        var_dump($conclusion);
     } else {
-        var_dump('no success');
+        $conclusion = 'No success...:(';
+        var_dump($conclusion);
     }
 }
 
@@ -65,8 +58,12 @@ if ($clean_inputs) {
 <head>
     <meta charset="UTF-8">
     <title>Forms</title>
+    <link rel="stylesheet" href="media/style.css">
 </head>
 <body>
 <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+<?php if (isset($conclusion)): ?>
+    <p><?php print $conclusion; ?></p>
+<?php endif; ?>
 </body>
 </html>

@@ -1,0 +1,29 @@
+* {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 50px auto;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: linen;
+}
+
+input {
+    padding: 5px;
+    margin: 10px auto 0;
+}
+
+button {
+    width: 200px;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+label {
+    margin: 10px 0;
+}
