@@ -5,50 +5,39 @@ require '../bootloader.php';
 $form = [
     'attr' => [
         'method' => 'POST'
-
     ],
     'fields' => [
-        'email' => [
-            'label' => 'Email:',
+        'full_name' => [
+            'label' => '',
             'type' => 'text',
             'validators' => [
-                'validate_field_not_empty'
+                'validate_field_not_empty',
+                'validate_full_name'
             ],
-            'placeholder' => 'aiste@gmail.com',
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Email',
-                    'class' => 'input-field'
+                    'placeholder' => 'Vardas ir pavarde',
                 ]
             ]
         ],
-        'password' => [
-            'label' => 'Password:',
-            'type' => 'password',
+        'age' => [
+            'label' => '',
+            'type' => 'number',
             'validators' => [
-                'validate_field_not_empty'
+                'validate_field_not_empty',
+                'validate_age'
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Your password...',
-                    'class' => 'input-field'
+                    'placeholder' => 'Amzius',
                 ]
             ]
         ]
     ],
     'buttons' => [
-        'login' => [
-            'title' => 'Login in',
+        'submit' => [
+            'title' => 'Ar aš normalus?',
             'type' => 'submit',
-            'extra' => [
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ]
-        ],
-        'clear' => [
-            'title' => 'Clear',
-            'type' => 'clear',
             'extra' => [
                 'attr' => [
                     'class' => 'btn'
@@ -61,7 +50,13 @@ $form = [
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-    validate_form($form, $clean_inputs);
+    $sucess = validate_form($form, $clean_inputs);
+
+    if ($sucess) {
+        var_dump('success');
+    } else {
+        var_dump('no success');
+    }
 }
 
 ?>
