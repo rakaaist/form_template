@@ -85,3 +85,25 @@ function validate_field_range (int $field_value, array &$field, array $params): 
 //    return true;
 //}
 
+
+//function validate_fields_match($form_values, array &$form, $params) {
+//    var_dump($form_values);
+//    if ($form_values[$params[0]] !== $form_values[$params[1]]) {
+//        $form['fields'][$params[1]]['error'] = 'Doesnt match';
+//        return false;
+//    }
+//    var_dump('true');
+//    return true;
+//}
+
+function validate_fields_match(array $form_values, array &$form, $params) {
+
+    for ($i = 1; $i < count($params); $i++) {
+            if ($form_values[$params[0]] !== $form_values[$params[$i]]) {
+                $form['fields'][$params[$i]]['error'] = 'Doesnt match';
+                return false;
+            }
+    }
+
+    return true;
+}

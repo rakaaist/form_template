@@ -42,5 +42,20 @@ function validate_form(array &$form, array $form_values): bool{
             }
         }
     }
-    return $is_valid;
+
+    foreach ($form['validators'] ?? [] as $validator_index => $validator) {
+        if (is_array($validator)) {
+            $field_is_valid = $validator_index($form_values, $form, $params = $validator);
+        } else {
+            $field_is_valid = $validator($form_values, $form);
+        }
+
+        if (!$field_is_valid) {
+            $is_valid = false;
+            break;
+
+        }
+}
+
+return $is_valid;
 }

@@ -7,33 +7,31 @@ $form = [
         'method' => 'POST'
     ],
     'fields' => [
-        'number_1' => [
-            'label' => 'Type number between 100 and 200',
-            'type' => 'number',
+        'password' => [
+            'label' => 'Password',
+            'type' => 'password',
             'validators' => [
-                'validate_field_not_empty',
-                'validate_field_range' => [
-                    'min' => 100,
-                    'max' => 200
-                ]
+                'validate_field_not_empty'
             ]
         ],
-        'number_2' => [
-            'label' => 'Type number between 50 and 100',
-            'type' => 'number',
+        'password_repeat' => [
+            'label' => 'Repeat password',
+            'type' => 'password',
             'validators' => [
-                'validate_field_not_empty',
-                'validate_field_range' => [
-                    'min' => 50,
-                    'max' => 100
-                ]
+                'validate_field_not_empty'
             ]
         ]
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Ar skiriu skaičius',
+            'title' => 'Check password',
             'type' => 'submit',
+        ]
+    ],
+    'validators' => [
+        'validate_fields_match' => [
+            'password',
+            'password_repeat'
         ]
     ]
 ];
