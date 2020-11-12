@@ -7,58 +7,46 @@ $form = [
         'method' => 'POST'
     ],
     'fields' => [
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'validators' => [
-                'validate_field_not_empty'
-            ]
-        ],
-        'password_repeat' => [
-            'label' => 'Repeat password',
-            'type' => 'password',
-            'validators' => [
-                'validate_field_not_empty'
-            ]
-        ],
-        'sex' => [
-            'label' => 'Sex',
+        'head' => [
+            'label' => 'Head',
             'type' => 'select',
             'options' => [
-                'male' => 'Kardanas',
-                'female' => 'Mova'
+                'afro' => 'Afro',
+                'asian' => 'Asian',
+                'european' => 'European'
             ],
-            'value' => 'female',
+            'value' => 'afro',
             'validators' => [
-                    'validate_select'
+                'validate_select'
+            ]
+        ],
+        'body' => [
+            'label' => 'Body',
+            'type' => 'select',
+            'options' => [
+                'slim' => 'Slim',
+                'fat' => 'Fat'
+            ],
+            'value' => 'slim',
+            'validators' => [
+                'validate_select'
             ]
         ]
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Check password',
+            'title' => 'Build me',
             'type' => 'submit',
         ]
     ],
-    'validators' => [
-        'validate_fields_match' => [
-            'password',
-            'password_repeat'
-        ]
-    ]
 ];
 
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-    $success = validate_form($form, $clean_inputs);
 
-    if ($success) {
-        $conclusion = 'Success!';
-        var_dump($conclusion);
-    } else {
-        $conclusion = 'No success...:(';
-        var_dump($conclusion);
+    if (validate_form($form, $clean_inputs)) {
+        $body_parts = $clean_inputs;
     }
 }
 
@@ -72,8 +60,10 @@ if ($clean_inputs) {
 </head>
 <body>
 <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-<?php if (isset($conclusion)): ?>
-    <p><?php print $conclusion; ?></p>
+<?php if ($body_parts ?? false): ?>
+    <?php foreach ($body_parts as $parts): ?>
+        <div class="<?php print $parts; ?> size"></div>
+    <?php endforeach; ?>
 <?php endif; ?>
 </body>
 </html>

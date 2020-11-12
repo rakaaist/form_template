@@ -97,6 +97,8 @@ function validate_field_range (int $field_value, array &$field, array $params): 
 //}
 
 /**
+ * Function checks whether both passwords typed are the same
+ *
  * @param array $form_values
  * @param array $form
  * @param $params
@@ -128,6 +130,7 @@ function validate_select($field_input, &$field){
 
         if (!isset($field['options'][$field_input])) {
             $field['error'] = 'not an option';
+
             return false;
         }
 
