@@ -20,6 +20,18 @@ $form = [
             'validators' => [
                 'validate_field_not_empty'
             ]
+        ],
+        'sex' => [
+            'label' => 'Sex',
+            'type' => 'select',
+            'options' => [
+                'male' => 'Kardanas',
+                'female' => 'Mova'
+            ],
+            'value' => 'female',
+            'validators' => [
+                    'validate_select'
+            ]
         ]
     ],
     'buttons' => [

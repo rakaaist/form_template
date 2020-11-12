@@ -96,14 +96,40 @@ function validate_field_range (int $field_value, array &$field, array $params): 
 //    return true;
 //}
 
+/**
+ * @param array $form_values
+ * @param array $form
+ * @param $params
+ * @return bool
+ */
 function validate_fields_match(array $form_values, array &$form, $params) {
 
-    for ($i = 1; $i < count($params); $i++) {
-            if ($form_values[$params[0]] !== $form_values[$params[$i]]) {
-                $form['fields'][$params[$i]]['error'] = 'Doesnt match';
+    foreach ($params as $field_index){
+            if ($form_values[$params[0]] !== $form_values[$field_index]) {
+                $form['fields'][$field_index]['error'] = strtr('Input doesnt match with @field', [
+                    '@field' => $form['fields'][$params[0]]['label']
+                ]);
                 return false;
             }
     }
+
+    return true;
+}
+
+/**
+ * Function checks whether the option name wasn't changed in console;
+ * only values provided in the array can be selected
+ *
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_select($field_input, &$field){
+
+        if (!isset($field['options'][$field_input])) {
+            $field['error'] = 'not an option';
+            return false;
+        }
 
     return true;
 }

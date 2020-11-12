@@ -80,3 +80,40 @@ function form(array $form): string {
 //    }
 };
 
+/**
+ * Sugeneruojami select atributai
+ *
+ * @param string $field_name
+ * @param array $field
+ * @return string
+ */
+function select_attr(string $field_name, array $field): string
+{
+    $attributes = [
+            'name' => $field_name,
+            'type' => $field['type'],
+            'value' => $field['value'] ?? ''
+        ] + ($field['extra']['attr'] ?? []);
+
+    return html_attr($attributes);
+}
+
+/**
+ * Sugeneruojami option atributai
+ *
+ * @param string $option_id
+ * @param array $field
+ * @return string
+ */
+function option_attr(string $option_id, array $field): string
+{
+    $attributes = [
+            'value' => $option_id
+        ];
+
+    if ($field['value'] == $option_id) {
+        $attributes['selected'] = 'selected';
+    }
+
+    return html_attr($attributes);
+}
