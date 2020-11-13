@@ -4,12 +4,14 @@
             <span><?php print $field['label']; ?></span>
             <?php if ($field['type'] == 'select'): ?>
                 <select <?php print select_attr($field_id, $field); ?>>
-                    <?php foreach ($field['options'] as $option_id => $option_title): ?>                        ?>
+                    <?php foreach ($field['options'] as $option_id => $option_title): ?>
                         <option <?php print option_attr($option_id, $field); ?>>
                             <?php print $option_title; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
+            <?php elseif ($field['type'] == 'textarea'): ?>
+                <textarea <?php print textarea_attr($field_id, $field); ?>><?php print $field['value'] ?? ''; ?></textarea>
             <?php else: ?>
                 <input <?php print input_attr($field_id, $field); ?>>
             <?php endif; ?>

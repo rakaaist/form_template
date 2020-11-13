@@ -117,3 +117,19 @@ function option_attr(string $option_id, array $field): string
 
     return html_attr($attributes);
 }
+
+/**
+ * Sugeneruojami textarea atributai
+ *
+ * @param string $field_name
+ * @param array $field
+ * @return string
+ */
+function textarea_attr(string $field_name, array $field): string
+{
+    $attributes = [
+            'name' => $field_name
+        ] + ($field['extra']['attr'] ?? []);
+
+    return html_attr($attributes);
+}

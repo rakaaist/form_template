@@ -31,6 +31,19 @@ $form = [
             'validators' => [
                 'validate_select'
             ]
+        ],
+        'textarea' => [
+            'type' => 'textarea',
+            'label' => '',
+            'value' => 'labas',
+            'validators' => [
+                    'validate_field_not_empty'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Type something'
+                ]
+            ]
         ]
     ],
     'buttons' => [
