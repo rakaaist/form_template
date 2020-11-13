@@ -32,28 +32,11 @@ label {
     height: 100px;
     width: 100px;
 }
-.afro, .asian, .european, .slim, .fat {
+
+.index_body {
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-}
-
-.afro {
-    background-image: url('https://i.pinimg.com/originals/9d/54/c2/9d54c2c7fe61b4de3b8ec66dcaa3339e.jpg');
-}
-
-.asian {
-    background-image: url('https://hw-media.herworld.com/public/hwp423m_01.jpg');
-}
-
-.european {
-    background-image: url('https://www.turkeytribune.com/wp-content/uploads/2017/03/nicole-kidman-wallpaper-1920x1440-24-1024x670.jpg');
-}
-
-.slim {
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRId4MEPRJvPr-I7lZVh8s2eXL81l9_Ppyi1Q&usqp=CAU');
-}
-
-.fat {
-    background-image: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-736836075-1-1532012191.jpg?crop=1xw:1xh;center,top&resize=480:*');
+    background-image: url('https://www.biarritz-pays-basque.com/wp-content/uploads/2019/05/pyrenees-mountains-3-jpg.jpg');
+    height: 100vh;
 }

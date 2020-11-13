@@ -2,66 +2,18 @@
 
 require '../bootloader.php';
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'head' => [
-            'label' => 'Head',
-            'type' => 'select',
-            'options' => [
-                'afro' => 'Afro',
-                'asian' => 'Asian',
-                'european' => 'European'
-            ],
-            'value' => 'afro',
-            'validators' => [
-                'validate_select'
-            ]
-        ],
-        'body' => [
-            'label' => 'Body',
-            'type' => 'select',
-            'options' => [
-                'slim' => 'Slim',
-                'fat' => 'Fat'
-            ],
-            'value' => 'slim',
-            'validators' => [
-                'validate_select'
-            ]
-        ],
-        'textarea' => [
-            'type' => 'textarea',
-            'label' => '',
-            'value' => 'labas',
-            'validators' => [
-                    'validate_field_not_empty'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Type something'
-                ]
-            ]
-        ]
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Build me',
-            'type' => 'submit',
-        ]
-    ],
-];
-
-$clean_inputs = get_clean_input($form);
-
-if ($clean_inputs) {
-
-    if (validate_form($form, $clean_inputs)) {
-        $body_parts = $clean_inputs;
-    }
-}
+//$clean_inputs = get_clean_input($form);
+//$error = '';
+//
+//if ($clean_inputs) {
+//
+//    if (validate_form($form, $clean_inputs)) {
+//        unset($clean_inputs['password_repeat']);
+//        array_to_file($clean_inputs, ROOT . '/app/data/db.json');
+//    } else {
+//        $error = 'Eik nx';
+//    }
+//}
 
 ?>
 <!doctype html>
@@ -71,12 +23,11 @@ if ($clean_inputs) {
     <title>Forms</title>
     <link rel="stylesheet" href="media/style.css">
 </head>
-<body>
-<?php require ROOT . '/core/templates/form.tpl.php'; ?>
-<?php if ($body_parts ?? false): ?>
-    <?php foreach ($body_parts as $parts): ?>
-        <div class="<?php print $parts; ?> size"></div>
-    <?php endforeach; ?>
-<?php endif; ?>
+<body class="index_body">
+<h1>LABAS, PENKTADIENI!</h1>
+<?php //require ROOT . '/core/templates/form.tpl.php'; ?>
+<?php //if (isset($error)): ?>
+<!--        <p>--><?php //print $error; ?><!--</p>-->
+<?php //endif; ?>
 </body>
 </html>
