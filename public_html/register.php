@@ -49,10 +49,18 @@ $message = '';
 if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
-        unset($clean_inputs['password_repeat']);
-        array_to_file($clean_inputs, ROOT . '/app/data/db.json');
-        $message = 'Successful registration!';
-        var_dump(file_to_array(ROOT . '/app/data/db.json'));
+
+        $validate_user = validate_user_unique($clean_inputs['email'],  $form['fields']['email']);
+
+        if($validate_user) {
+
+            $message = 'Successful registration!';
+            unset($clean_inputs['password_repeat']);
+            $data = file_to_array(ROOT . '/app/data/db.json');
+            $data[] = $clean_inputs;
+            var_dump($data);
+            $json = array_to_file($data, ROOT . '/app/data/db.json');
+        }
     } else {
         $message = 'Eik nx';
     }
