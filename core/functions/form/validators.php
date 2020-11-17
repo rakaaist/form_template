@@ -136,3 +136,20 @@ function validate_select($field_input, &$field){
 
     return true;
 }
+
+/**
+ * Function checks whether the email is the correct style
+ *
+ * @param $field_input
+ * @param $field
+ * @return bool
+ */
+function validate_email($field_input, &$field){
+    if (!preg_match("/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/", $field_input)) {
+        $field['error'] = 'Invalid email format';
+        return false;
+    }
+
+    return true;
+}
+
