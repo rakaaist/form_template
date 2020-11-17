@@ -2,18 +2,20 @@
 
 require '../bootloader.php';
 
-//$clean_inputs = get_clean_input($form);
-//$error = '';
-//
-//if ($clean_inputs) {
-//
-//    if (validate_form($form, $clean_inputs)) {
-//        unset($clean_inputs['password_repeat']);
-//        array_to_file($clean_inputs, ROOT . '/app/data/db.json');
-//    } else {
-//        $error = 'Eik nx';
-//    }
-//}
+/**
+ * CLIENT SIDE COOKIES
+ *
+ * $_COOKIE masyvas
+ * setcookie request is sent from browser to server
+ */
+$user_id = $_COOKIE['user_id'] ?? uniqid();
+$visits = ($_COOKIE['visits'] ?? 0) + 1;
+
+setcookie('user_id', $user_id, time() + 3600);
+setcookie('visits', $visits, time() + 3600);
+
+$h1 = "Hi, this is your ID $user_id";
+$h2 = "You visited $visits times";
 
 ?>
 <!doctype html>
@@ -25,6 +27,8 @@ require '../bootloader.php';
 </head>
 <body class="index_body">
 <h1>LABAS, PENKTADIENI!</h1>
+<p><?php print $h1; ?></p>
+<p><?php print $h2; ?></p>
 <?php //require ROOT . '/core/templates/form.tpl.php'; ?>
 <?php //if (isset($error)): ?>
 <!--        <p>--><?php //print $error; ?><!--</p>-->
