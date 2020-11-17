@@ -17,6 +17,13 @@ setcookie('visits', $visits, time() + 3600);
 $h1 = "Hi, this is your ID $user_id";
 $h2 = "You visited $visits times";
 
+
+/**
+ * SERVER SIDE COOKIES
+ */
+session_start();
+var_dump($_COOKIE);
+
 ?>
 <!doctype html>
 <html lang="en">

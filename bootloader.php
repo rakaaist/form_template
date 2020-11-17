@@ -8,3 +8,5 @@ require 'core/functions/form/core.php';
 require 'core/functions/form/validators.php';
 require 'core/functions/file.php';
 require 'app/functions/form/validators.php';
+
+session_start();
