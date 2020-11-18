@@ -2,5 +2,4 @@
 
 require '../bootloader.php';
 
-session_destroy();
-header("location: /login.php");
+logout("login.php");

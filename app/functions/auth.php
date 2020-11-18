@@ -23,3 +23,17 @@ function is_logged_in(): bool {
     return false;
 }
 
+/**
+ * Function ends the session
+ *
+ * @param null $redirected
+ */
+function logout($redirected = null): void {
+    $_SESSION = [];
+    session_destroy();
+
+    if ($redirected) {
+        header("location: /$redirected");
+    }
+}
+

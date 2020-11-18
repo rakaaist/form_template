@@ -2,6 +2,11 @@
 
 require '../bootloader.php';
 
+if (is_logged_in()) {
+    header("location: /index.php");
+    exit();
+}
+
 $form = [
     'attr' => [
         'method' => 'POST'
@@ -45,7 +50,6 @@ if ($clean_inputs) {
         $message = 'Successful login!';
         $_SESSION['email'] = $clean_inputs['email'];
         $_SESSION['password'] = $clean_inputs['password'];
-
     } else {
         $message = 'This user doesnt exist';
     }
@@ -54,7 +58,6 @@ if ($clean_inputs) {
 var_dump($_SESSION);
 
 var_dump(is_logged_in());
-
 
 ?>
 <!doctype html>
