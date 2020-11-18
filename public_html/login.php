@@ -51,6 +51,11 @@ if ($clean_inputs) {
     }
 }
 
+var_dump($_SESSION);
+
+var_dump(is_logged_in());
+
+
 ?>
 <!doctype html>
 <html lang="en">
