@@ -1,6 +1,7 @@
 <?php
 
 require '../bootloader.php';
+$nav = nav();
 
 if (is_logged_in()) {
     header("location: /index.php");
@@ -65,6 +66,7 @@ if ($clean_inputs) {
             $data[] = $clean_inputs;
             var_dump($data);
             $json = array_to_file($data, ROOT . '/app/data/db.json');
+            header("location: /login.php");
         }
     } else {
         $message = 'Eik nx';
@@ -79,6 +81,7 @@ if ($clean_inputs) {
     <title>Forms</title>
     <link rel="stylesheet" href="media/style.css">
 </head>
+<?php require ROOT . '/app/templates/nav.php'; ?>
 <body>
 <?php require ROOT . '/core/templates/form.tpl.php'; ?>
 <?php if (isset($message)): ?>

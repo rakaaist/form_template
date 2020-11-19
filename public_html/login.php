@@ -1,6 +1,7 @@
 <?php
 
 require '../bootloader.php';
+$nav = nav();
 
 if (is_logged_in()) {
     header("location: /index.php");
@@ -50,14 +51,11 @@ if ($clean_inputs) {
         $message = 'Successful login!';
         $_SESSION['email'] = $clean_inputs['email'];
         $_SESSION['password'] = $clean_inputs['password'];
+        header("location: /admin/add.php");
     } else {
         $message = 'This user doesnt exist';
     }
 }
-
-var_dump($_SESSION);
-
-var_dump(is_logged_in());
 
 ?>
 <!doctype html>
@@ -67,6 +65,7 @@ var_dump(is_logged_in());
     <title>Forms</title>
     <link rel="stylesheet" href="media/style.css">
 </head>
+<?php require ROOT . '/app/templates/nav.php'; ?>
 <body>
 <?php require ROOT . '/core/templates/form.tpl.php'; ?>
 <?php if (isset($message)): ?>
