@@ -66,10 +66,12 @@ if ($clean_inputs) {
     <link rel="stylesheet" href="media/style.css">
 </head>
 <?php require ROOT . '/app/templates/nav.php'; ?>
-<body>
-<?php require ROOT . '/core/templates/form.tpl.php'; ?>
-<?php if (isset($message)): ?>
-    <p><?php print $message; ?></p>
-<?php endif; ?>
+<body class="login-background">
+<main>
+    <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+    <?php if (isset($message)): ?>
+        <p><?php print $message; ?></p>
+    <?php endif; ?>
+</main>
 </body>
 </html>

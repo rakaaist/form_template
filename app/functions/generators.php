@@ -1,33 +1,31 @@
 <?php
 
-function nav(){
-    $nav = [];
+function nav()
+{
 
     if (is_logged_in()) {
-        $nav = [
+        return $nav = [
             'Home' => [
-                'link' => 'index.php'
+                'link' => '../index.php'
             ],
             'Add' => [
-                'link' => 'admin/add.php'
+                'link' => '../admin/add.php'
             ],
             'Logout' => [
-                'link' => 'logout.php'
+                'link' => '../logout.php'
             ]
         ];
     } else {
-        $nav = [
+        return $nav = [
             'Home' => [
-                'link' => 'index.php'
+                'link' => '../index.php'
             ],
             'Register' => [
-                'link' => 'register.php'
+                'link' => '../register.php'
             ],
             'Login' => [
-                'link' => 'login.php'
+                'link' => '../login.php'
             ]
         ];
     }
-
-    return $nav;
 }

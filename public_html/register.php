@@ -56,9 +56,9 @@ if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
 
-        $validate_user = validate_user_unique($clean_inputs['email'],  $form['fields']['email']);
+        $validate_user = validate_user_unique($clean_inputs['email'], $form['fields']['email']);
 
-        if($validate_user) {
+        if ($validate_user) {
 
             $message = 'Successful registration!';
             unset($clean_inputs['password_repeat']);
@@ -82,10 +82,12 @@ if ($clean_inputs) {
     <link rel="stylesheet" href="media/style.css">
 </head>
 <?php require ROOT . '/app/templates/nav.php'; ?>
-<body>
-<?php require ROOT . '/core/templates/form.tpl.php'; ?>
-<?php if (isset($message)): ?>
-    <p><?php print $message; ?></p>
-<?php endif; ?>
+<body class="register-background">
+<main>
+    <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+    <?php if (isset($message)): ?>
+        <p><?php print $message; ?></p>
+    <?php endif; ?>
+</main>
 </body>
 </html>

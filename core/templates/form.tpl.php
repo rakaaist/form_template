@@ -1,7 +1,7 @@
 <form <?php print form($form['attr']); ?>>
     <?php foreach ($form['fields'] as $field_id => $field): ?>
         <label>
-            <span><?php print $field['label']; ?></span>
+            <?php print $field['label']; ?><br>
             <?php if ($field['type'] == 'select'): ?>
                 <select <?php print select_attr($field_id, $field); ?>>
                     <?php foreach ($field['options'] as $option_id => $option_title): ?>
