@@ -71,7 +71,6 @@ $form = [
 ];
 
 $clean_inputs = get_clean_input($form);
-$message = '';
 
 if ($clean_inputs) {
 

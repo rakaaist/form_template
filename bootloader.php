@@ -11,5 +11,7 @@ require 'core/functions/file.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/auth.php';
 require 'app/functions/generators.php';
+require 'core/classes/FileDB.php';
+
 
 session_start();

@@ -64,7 +64,6 @@ if ($clean_inputs) {
             unset($clean_inputs['password_repeat']);
             $data = file_to_array(ROOT . '/app/data/db.json');
             $data[] = $clean_inputs;
-            var_dump($data);
             $json = array_to_file($data, ROOT . '/app/data/db.json');
             header("location: /login.php");
         }
