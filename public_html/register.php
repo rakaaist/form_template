@@ -17,7 +17,8 @@ $form = [
             'label' => 'Email',
             'type' => 'email',
             'validators' => [
-                'validate_field_not_empty'
+                'validate_field_not_empty',
+                'validate_user_unique'
             ]
         ],
         'password' => [
@@ -50,25 +51,21 @@ $form = [
 ];
 
 $clean_inputs = get_clean_input($form);
-$message = '';
 
 if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
+        unset($clean_inputs['password_repeat']);
 
-        $validate_user = validate_user_unique($clean_inputs['email'], $form['fields']['email']);
+        $data = new FileDB(DB_FILE);
 
-        if ($validate_user) {
-
-            $message = 'Successful registration!';
-            unset($clean_inputs['password_repeat']);
-            $data = file_to_array(ROOT . '/app/data/db.json');
-            $data[] = $clean_inputs;
-            $json = array_to_file($data, ROOT . '/app/data/db.json');
-            header("location: /login.php");
-        }
+        $data->load();
+        $data->createTable('users');
+        $data->insertRow('users', $clean_inputs);
+        $data->save();
+        header("location: /login.php");
     } else {
-        $message = 'Eik nx';
+        $message = 'Something went wrong';
     }
 }
 

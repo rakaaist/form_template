@@ -43,16 +43,12 @@ $form = [
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-
     $form_success = validate_form($form, $clean_inputs);
 
     if ($form_success) {
-        $message = 'Successful login!';
         $_SESSION['email'] = $clean_inputs['email'];
         $_SESSION['password'] = $clean_inputs['password'];
         header("location: /admin/add.php");
-    } else {
-        $message = 'This user doesnt exist';
     }
 }
 
@@ -68,9 +64,6 @@ if ($clean_inputs) {
 <body class="login-background">
 <main>
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-    <?php if (isset($message)): ?>
-        <p><?php print $message; ?></p>
-    <?php endif; ?>
 </main>
 </body>
 </html>

@@ -156,7 +156,7 @@ class FileDB
     {
         if (!$this->rowExists($table_name, $row_id)) {
 
-            if ($row_id == null) {
+            if ($row_id === null) {
                 $this->data[$table_name][] = $row;
                 $row_id = array_key_last($this->data[$table_name]);
             } else {
@@ -189,7 +189,8 @@ class FileDB
      * @param $row
      * @return bool
      */
-    public function updateRow(string $table_name, $row_id, array $row): bool {
+    public function updateRow(string $table_name, $row_id, array $row): bool
+    {
         if ($this->rowExists($table_name, $row_id)) {
             $this->data[$table_name][$row_id] = $row;
 
@@ -198,4 +199,95 @@ class FileDB
 
         return false;
     }
+
+    /**
+     * Function deletes the entire row if row_id exists
+     *
+     * @param string $table_name
+     * @param $row_id
+     * @return bool
+     */
+    public function deleteRow(string $table_name, $row_id): bool
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            unset($this->data[$table_name][$row_id]);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Function returns row by row_id given if it exists
+     *
+     * @param string $table_name
+     * @param $row_id
+     * @return false|array
+     */
+    public function getRowById(string $table_name, $row_id)
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            return $this->data[$table_name][$row_id];
+        }
+
+        return false;
+    }
+
+    /**
+     * Function returns an array with rows according to conditions given
+     *
+     * @param string $table_name
+     * @param array $conditions
+     * @return array
+     */
+    public function getRowsWhere(string $table_name, array $conditions = []): array
+    {
+        $results = [];
+
+        foreach ($this->data[$table_name] as $row_id => $row) {
+            $found = true;
+
+            foreach ($conditions as $condition_id => $condition_value) {
+                if ($row[$condition_id] !== $condition_value) {
+                    $found = false;
+                    break;
+                }
+            }
+            if ($found) {
+                $results[$row_id] = $row;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * Function returns one (first) row according to conditions given
+     *
+     * @param string $table_name
+     * @param array $conditions
+     * @return false/array
+     */
+    public function getRowWhere(string $table_name, array $conditions)
+    {
+        foreach ($this->data[$table_name] as $row_id => $row) {
+            $found = true;
+
+            foreach ($conditions as $condition_id => $condition_value) {
+                if ($row[$condition_id] !== $condition_value) {
+                    $found = false;
+                    break;
+                }
+            }
+
+            if ($found) {
+                return $row;
+            }
+        }
+
+        return false;
+    }
 }
+
+

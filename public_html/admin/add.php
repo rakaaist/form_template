@@ -75,11 +75,12 @@ $clean_inputs = get_clean_input($form);
 if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
-
-        $message = 'Successful upload!';
-        $data = file_to_array(ITEM_FILE);
-        $data[] = $clean_inputs;
-        $json = array_to_file($data, ITEM_FILE);
+        $data = new FileDB(DB_FILE);
+        $data->load();
+        $data->createTable('items');
+        $clean_inputs['email'] = $_SESSION['email'];
+        $data->insertRow('items', $clean_inputs);
+        $data->save();
         header("location: /index.php");
     } else {
         $message = 'Something went wrong';

@@ -7,17 +7,17 @@
  * @param $file_name
  * @return bool
  */
-function validate_user_unique ($email, &$field) {
+function validate_user_unique($email, &$field)
+{
+    $db_data = new FileDB(DB_FILE);
+    $db_data->load();
+    $user_exists = $db_data->getRowWhere('users', ['email' => $email]);
 
-        $db_data = file_to_array(DB_FILE);
+    if ($user_exists) {
+        $field['error'] = 'This user already exists';
 
-        foreach($db_data as $user) {
-            if ($user['email'] === $email) {
-                $field['error'] = 'This user already exists';
-
-                return false;
-            }
-        }
+        return false;
+    }
 
     return true;
 }
@@ -30,18 +30,20 @@ function validate_user_unique ($email, &$field) {
  * @param $form
  * @return bool
  */
-function validate_login($filtered_input, &$form) {
+function validate_login($filtered_input, &$form)
+{
+    $db_data = new FileDB(DB_FILE);
+    $db_data->load();
+    $login = $db_data->getRowWhere('users', [
+        'email' => $filtered_input['email'],
+        'password' => $filtered_input['password']
+    ]);
 
-    $db_data = file_to_array(DB_FILE);
-
-    foreach($db_data as $user) {
-        if (($user['email'] === $filtered_input['email'])
-            && ($user['password'] === $filtered_input['password'])){
-            return true;
-        }
+    if ($login) {
+        return true;
     }
 
-    $form['error'] = 'no user';
+    $form['error'] = 'Password or email is incorrect!';
     return false;
 }
 
