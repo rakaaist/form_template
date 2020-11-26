@@ -15,7 +15,6 @@ header {
     padding: 20px;
     /*position: fixed;*/
     top: 0;
-    width: 100vw;
 }
 
 ul {
@@ -35,14 +34,10 @@ a {
     margin-left: 20px;
 }
 
-main, nav {
-    width: 80%;
-    margin: 0 auto;
-}
-
-main {
-    padding: 70px 0 0;
-}
+/*main, nav {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*}*/
 
 form {
     display: flex;

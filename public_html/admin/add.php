@@ -77,7 +77,6 @@ if ($clean_inputs) {
     if (validate_form($form, $clean_inputs)) {
         $data = new FileDB(DB_FILE);
         $data->load();
-        $data->createTable('items');
         $clean_inputs['email'] = $_SESSION['email'];
         $data->insertRow('items', $clean_inputs);
         $data->save();

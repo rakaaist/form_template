@@ -60,7 +60,6 @@ if ($clean_inputs) {
         $data = new FileDB(DB_FILE);
 
         $data->load();
-        $data->createTable('users');
         $data->insertRow('users', $clean_inputs);
         $data->save();
         header("location: /login.php");
