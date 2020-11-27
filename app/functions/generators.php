@@ -1,8 +1,12 @@
 <?php
 
+/**
+ * Function generates different nav bar if user is logged in and otherwise;
+ *
+ * @return array
+ */
 function nav()
 {
-
     if (is_logged_in()) {
         return $nav = [
             'Home' => [
@@ -10,6 +14,9 @@ function nav()
             ],
             'Add' => [
                 'link' => '../admin/add.php'
+            ],
+            'My' => [
+                'link' => '../admin/my.php'
             ],
             'Logout' => [
                 'link' => '../logout.php'
@@ -28,4 +35,17 @@ function nav()
             ]
         ];
     }
+}
+
+/**
+ * Function generates pixel style attributes
+ *
+ * @param $x
+ * @param $y
+ * @param $color
+ * @return string
+ */
+function pixel_attr($x, $y, $color)
+{
+    return "top: {$y}px; left: {$x}px; background-color: $color;";
 }

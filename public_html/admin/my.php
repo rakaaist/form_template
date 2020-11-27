@@ -1,19 +1,25 @@
 <?php
 
-require '../bootloader.php';
+require '../../bootloader.php';
+
+if (!is_logged_in()) {
+    header("location: /login.php");
+    exit();
+}
 
 $nav = nav();
 
 $data = new FileDB(DB_FILE);
 $data->load();
-$pixels = $data->getRowsWhere('pixels');
+$pixels = $data->getRowsWhere('pixels', ['email' => $_SESSION['email']]);
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Forms</title>
-    <link rel="stylesheet" href="media/style.css">
+    <link rel="stylesheet" href="../media/style.css">
 </head>
 <body>
 
@@ -24,7 +30,7 @@ $pixels = $data->getRowsWhere('pixels');
 
         <?php foreach ($pixels as $pixel): ?>
             <span class="pixel" style="
-            <?php print pixel_attr($pixel['coordinate_x'], $pixel['coordinate_y'], $pixel['colour']); ?>">
+                 <?php print pixel_attr($pixel['coordinate_x'], $pixel['coordinate_y'], $pixel['colour']); ?>">
             </span>
         <?php endforeach; ?>
 

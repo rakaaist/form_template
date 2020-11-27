@@ -1,12 +1,13 @@
 <?php
 
 require '../bootloader.php';
-$nav = nav();
 
 if (is_logged_in()) {
     header("location: /index.php");
     exit();
 }
+
+$nav = nav();
 
 $form = [
     'attr' => [
@@ -58,16 +59,12 @@ if ($clean_inputs) {
         unset($clean_inputs['password_repeat']);
 
         $data = new FileDB(DB_FILE);
-
         $data->load();
         $data->insertRow('users', $clean_inputs);
         $data->save();
         header("location: /login.php");
-    } else {
-        $message = 'Something went wrong';
     }
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -76,13 +73,14 @@ if ($clean_inputs) {
     <title>Forms</title>
     <link rel="stylesheet" href="media/style.css">
 </head>
-<?php require ROOT . '/app/templates/nav.php'; ?>
 <body class="register-background">
+
+<?php require ROOT . '/app/templates/nav.php'; ?>
+
 <main>
+
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-    <?php if (isset($message)): ?>
-        <p><?php print $message; ?></p>
-    <?php endif; ?>
+
 </main>
 </body>
 </html>

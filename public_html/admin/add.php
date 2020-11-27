@@ -13,60 +13,55 @@ $form = [
         'method' => 'POST'
     ],
     'fields' => [
-        'title' => [
-            'label' => 'Type of accessory',
-            'type' => 'text',
-            'validators' => [
-                'validate_field_not_empty'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'What accessory is that?'
-                ]
-            ]
-        ],
-        'link' => [
-            'label' => 'URL',
-            'type' => 'text',
-            'validators' => [
-                'validate_field_not_empty'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Type image url...'
-                ]
-            ]
-        ],
-        'description' => [
-            'type' => 'textarea',
-            'label' => 'Description',
-            'validators' => [
-                'validate_field_not_empty'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Type something'
-                ]
-            ]
-        ],
-        'price' => [
+        'coordinate_x' => [
+            'label' => '',
             'type' => 'number',
-            'label' => 'Price',
             'validators' => [
-                'validate_field_not_empty'
+                'validate_field_not_empty',
+                'validate_coordinate'
             ],
             'extra' => [
                 'attr' => [
-                    'placeholder' => 'Price'
+                    'placeholder' => 'Coordinate X'
                 ]
+            ]
+        ],
+        'coordinate_y' => [
+            'label' => '',
+            'type' => 'number',
+            'validators' => [
+                'validate_field_not_empty',
+                'validate_coordinate'
+            ],
+            'extra' => [
+                'attr' => [
+                    'placeholder' => 'Coordinate Y'
+                ]
+            ]
+        ],
+        'colour' => [
+            'label' => '',
+            'type' => 'select',
+            'options' => [
+                'black' => 'Black',
+                'red' => 'Red',
+                'green' => 'Green',
+                'blue' => 'Blue',
+            ],
+            'value' => 'red',
+            'validators' => [
+                'validate_select'
             ]
         ]
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Upload',
+            'title' => 'Upload pixel!',
             'type' => 'submit',
         ]
+    ],
+    'validators' => [
+        'validate_unique_pixel'
     ]
 ];
 
@@ -78,11 +73,9 @@ if ($clean_inputs) {
         $data = new FileDB(DB_FILE);
         $data->load();
         $clean_inputs['email'] = $_SESSION['email'];
-        $data->insertRow('items', $clean_inputs);
+        $data->insertRow('pixels', $clean_inputs);
         $data->save();
-        header("location: /index.php");
-    } else {
-        $message = 'Something went wrong';
+        $message = 'Successful upload of pixel!';
     }
 }
 
@@ -94,12 +87,16 @@ if ($clean_inputs) {
     <title>Forms</title>
     <link rel="stylesheet" href="../media/style.css">
 </head>
-<?php require ROOT . '/app/templates/nav.php'; ?>
 <body class="add-background">
+
+<?php require ROOT . '/app/templates/nav.php'; ?>
+
 <main>
+
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+
     <?php if (isset($message)): ?>
-        <p><?php print $message; ?></p>
+        <h3><?php print $message; ?></h3>
     <?php endif; ?>
 </main>
 </body>
