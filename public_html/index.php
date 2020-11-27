@@ -24,7 +24,7 @@ $pixels = $data->getRowsWhere('pixels');
 
         <?php foreach ($pixels as $pixel): ?>
             <span class="pixel" style="
-            <?php print pixel_attr($pixel['coordinate_x'], $pixel['coordinate_y'], $pixel['colour']); ?>">
+                <?php print pixel_attr($pixel); ?>">
             </span>
         <?php endforeach; ?>
 

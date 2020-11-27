@@ -40,12 +40,10 @@ function nav()
 /**
  * Function generates pixel style attributes
  *
- * @param $x
- * @param $y
- * @param $color
+ * @param $attr
  * @return string
  */
-function pixel_attr($x, $y, $color)
+function pixel_attr($attr)
 {
-    return "top: {$y}px; left: {$x}px; background-color: $color;";
+    return "top: {$attr['coordinate_y']}px; left: {$attr['coordinate_x']}px; background-color: {$attr['colour']};";
 }
