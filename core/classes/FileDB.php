@@ -1,11 +1,12 @@
 <?php
 
+namespace Core;
+
 /**
  * Class FileDB
  */
 class FileDB
 {
-
     private $file_name;
     private $data = [];
 

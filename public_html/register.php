@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 require '../bootloader.php';
 
 if (is_logged_in()) {
@@ -57,11 +59,7 @@ if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
         unset($clean_inputs['password_repeat']);
-
-        $data = new FileDB(DB_FILE);
-        $data->load();
-        $data->insertRow('users', $clean_inputs);
-        $data->save();
+        App::$db->insertRow('users', $clean_inputs);
         header("location: /login.php");
     }
 }

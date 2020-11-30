@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 require '../../bootloader.php';
 
 if (!is_logged_in()) {
@@ -9,9 +11,7 @@ if (!is_logged_in()) {
 
 $nav = nav();
 
-$data = new FileDB(DB_FILE);
-$data->load();
-$pixels = $data->getRowsWhere('pixels', ['email' => $_SESSION['email']]);
+$pixels = App::$db->getRowsWhere('pixels', ['email' => $_SESSION['email']]);
 
 ?>
 <!doctype html>

@@ -1,12 +1,12 @@
 <?php
 
+use App\App;
+
 require '../bootloader.php';
 
 $nav = nav();
 
-$data = new FileDB(DB_FILE);
-$data->load();
-$pixels = $data->getRowsWhere('pixels');
+$pixels = App::$db->getRowsWhere('pixels');
 ?>
 <!doctype html>
 <html lang="en">

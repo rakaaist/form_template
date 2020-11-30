@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 require '../../bootloader.php';
 $nav = nav();
 
@@ -70,11 +72,8 @@ $clean_inputs = get_clean_input($form);
 if ($clean_inputs) {
 
     if (validate_form($form, $clean_inputs)) {
-        $data = new FileDB(DB_FILE);
-        $data->load();
         $clean_inputs['email'] = $_SESSION['email'];
-        $data->insertRow('pixels', $clean_inputs);
-        $data->save();
+        App::$db->insertRow('pixels', $clean_inputs);
         $message = 'Successful upload of pixel!';
     }
 }

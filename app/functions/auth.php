@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 /**
  * Function checks whether the user has logged in;
  * checks whether user (password and email) exists in database;
@@ -9,10 +11,8 @@
 function is_logged_in()
 {
     if ($_SESSION) {
-        $db_data = new FileDB(DB_FILE);
-        $db_data->load();
 
-        return (bool)$db_data->getRowWhere('users', [
+        return (bool)App::$db->getRowsWhere('users', [
             'email' => $_SESSION['email'],
             'password' => $_SESSION['password']]);
     }
