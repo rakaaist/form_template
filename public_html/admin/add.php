@@ -5,7 +5,7 @@ use App\App;
 require '../../bootloader.php';
 $nav = nav();
 
-if (!is_logged_in()) {
+if (!App::$session->getUser()) {
     header("location: /login.php");
     exit();
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 /**
  * Function generates different nav bar if user is logged in and otherwise;
  *
@@ -7,7 +9,7 @@
  */
 function nav()
 {
-    if (is_logged_in()) {
+    if (App::$session->getUser()) {
         return $nav = [
             'Home' => [
                 'link' => '../index.php'

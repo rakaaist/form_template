@@ -1,12 +1,15 @@
 <?php
 
-require '../bootloader.php';
-$nav = nav();
+use App\App;
 
-if (is_logged_in()) {
+require '../bootloader.php';
+
+if (App::$session->getUser()) {
     header("location: /index.php");
     exit();
 }
+
+$nav = nav();
 
 $form = [
     'attr' => [
@@ -46,8 +49,7 @@ if ($clean_inputs) {
     $form_success = validate_form($form, $clean_inputs);
 
     if ($form_success) {
-        $_SESSION['email'] = $clean_inputs['email'];
-        $_SESSION['password'] = $clean_inputs['password'];
+        App::$session->login($clean_inputs['email'], $clean_inputs['password']);
         header("location: /admin/add.php");
     }
 }
@@ -60,10 +62,14 @@ if ($clean_inputs) {
     <title>Forms</title>
     <link rel="stylesheet" href="media/style.css">
 </head>
-<?php require ROOT . '/app/templates/nav.php'; ?>
 <body class="login-background">
+
+<?php require ROOT . '/app/templates/nav.php'; ?>
+
 <main>
+
     <?php require ROOT . '/core/templates/form.tpl.php'; ?>
+
 </main>
 </body>
 </html>
