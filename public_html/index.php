@@ -1,12 +1,12 @@
 <?php
 
 use App\App;
+use App\Tracker;
 
 require '../bootloader.php';
 
 $nav = nav();
 
-$pixels = App::$db->getRowsWhere('pixels');
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,12 +21,6 @@ $pixels = App::$db->getRowsWhere('pixels');
 
 <main>
     <div class="poop-wall">
-
-        <?php foreach ($pixels as $pixel): ?>
-            <span class="pixel" style="
-                <?php print pixel_attr($pixel); ?>">
-            </span>
-        <?php endforeach; ?>
 
     </div>
 </main>
