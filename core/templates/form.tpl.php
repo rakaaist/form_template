@@ -1,5 +1,5 @@
-<form <?php print form($form['attr']); ?>>
-    <?php foreach ($form['fields'] as $field_id => $field): ?>
+<form <?php print form($data['attr']); ?>>
+    <?php foreach ($data['fields'] as $field_id => $field): ?>
         <label>
             <?php print $field['label']; ?><br>
             <?php if ($field['type'] == 'select'): ?>
@@ -20,12 +20,12 @@
             <?php endif; ?>
         </label>
     <?php endforeach; ?>
-    <?php foreach ($form['buttons'] as $button_name => $button): ?>
+    <?php foreach ($data['buttons'] as $button_name => $button): ?>
         <button <?php print button_attr($button_name, $button); ?>>
             <?php print $button['title']; ?>
         </button>
     <?php endforeach; ?>
-    <?php if (isset($form['error'])): ?>
-        <p class="error"><?php print $form['error']; ?></p>
+    <?php if (isset($data['error'])): ?>
+        <p class="error"><?php print $data['error']; ?></p>
     <?php endif; ?>
 </form>

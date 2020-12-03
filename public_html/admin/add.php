@@ -1,102 +1,32 @@
 <?php
 
 use App\App;
+use App\Views\BasePage;
+use App\Views\Forms\Admin\AddForm;
+use App\Views\Navigation;
 
 require '../../bootloader.php';
-$nav = nav();
 
 if (!App::$session->getUser()) {
     header("location: /login.php");
     exit();
 }
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'coordinate_x' => [
-            'label' => '',
-            'type' => 'number',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_coordinate'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Coordinate X'
-                ]
-            ]
-        ],
-        'coordinate_y' => [
-            'label' => '',
-            'type' => 'number',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_coordinate'
-            ],
-            'extra' => [
-                'attr' => [
-                    'placeholder' => 'Coordinate Y'
-                ]
-            ]
-        ],
-        'colour' => [
-            'label' => '',
-            'type' => 'select',
-            'options' => [
-                'black' => 'Black',
-                'red' => 'Red',
-                'green' => 'Green',
-                'blue' => 'Blue',
-            ],
-            'value' => 'red',
-            'validators' => [
-                'validate_select'
-            ]
-        ]
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Upload pixel!',
-            'type' => 'submit',
-        ]
-    ],
-    'validators' => [
-        'validate_unique_pixel'
-    ]
-];
+$form = new AddForm();
 
-$clean_inputs = get_clean_input($form);
+$clean_inputs = $form->values();
 
-if ($clean_inputs) {
-
-    if (validate_form($form, $clean_inputs)) {
-        $clean_inputs['email'] = $_SESSION['email'];
-        App::$db->insertRow('pixels', $clean_inputs);
-        $message = 'Successful upload of pixel!';
-    }
+if ($form->values()) {
+    $clean_inputs['email'] = $_SESSION['email'];
+    App::$db->insertRow('pixels', $clean_inputs);
+    $message = 'Successful upload of pixel!';
 }
 
+$page = new BasePage([
+    'title' => 'Register',
+    'content' => $form->render()
+]);
+
+print $page->render();
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forms</title>
-    <link rel="stylesheet" href="../media/style.css">
-</head>
-<body class="add-background">
 
-<?php require ROOT . '/app/templates/nav.php'; ?>
-
-<main>
-
-    <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-
-    <?php if (isset($message)): ?>
-        <h3><?php print $message; ?></h3>
-    <?php endif; ?>
-</main>
-</body>
-</html>

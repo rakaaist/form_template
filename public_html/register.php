@@ -1,6 +1,10 @@
 <?php
 
 use App\App;
+use App\Views\BasePage;
+use App\Views\Forms\LoginForm;
+use App\Views\Forms\RegisterForm;
+use App\Views\Navigation;
 
 require '../bootloader.php';
 
@@ -9,76 +13,22 @@ if (App::$session->getUser()) {
     exit();
 }
 
-$nav = nav();
+$navigation = new Navigation();
 
-$form = [
-    'attr' => [
-        'method' => 'POST'
-    ],
-    'fields' => [
-        'email' => [
-            'label' => 'Email',
-            'type' => 'email',
-            'validators' => [
-                'validate_field_not_empty',
-                'validate_user_unique'
-            ]
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'validators' => [
-                'validate_field_not_empty'
-            ]
-        ],
-        'password_repeat' => [
-            'label' => 'Repeat password',
-            'type' => 'password',
-            'validators' => [
-                'validate_field_not_empty'
-            ]
-        ],
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Register',
-            'type' => 'submit',
-        ]
-    ],
-    'validators' => [
-        'validate_fields_match' => [
-            'password',
-            'password_repeat'
-        ]
-    ]
-];
+$form = new RegisterForm();
 
-$clean_inputs = get_clean_input($form);
+$clean_inputs = $form->values();
 
-if ($clean_inputs) {
-
-    if (validate_form($form, $clean_inputs)) {
-        unset($clean_inputs['password_repeat']);
-        App::$db->insertRow('users', $clean_inputs);
-        header("location: /login.php");
-    }
+if ($form->validateForm()) {
+    unset($clean_inputs['password_repeat']);
+    App::$db->insertRow('users', $clean_inputs);
+    header("location: /login.php");
 }
+
+$page = new BasePage([
+    'title' => 'Register',
+    'content' => $form->render()
+]);
+
+print $page->render();
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forms</title>
-    <link rel="stylesheet" href="media/style.css">
-</head>
-<body class="register-background">
-
-<?php require ROOT . '/app/templates/nav.php'; ?>
-
-<main>
-
-    <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-
-</main>
-</body>
-</html>
