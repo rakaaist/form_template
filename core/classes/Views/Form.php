@@ -15,10 +15,8 @@ class Form extends View
     /**
      * Filters inputs, accepts <>! in order not to hack
      *
-     * @param $form
-     * @return mixed
+     * @return array|null
      */
-
     public function values(): ?array
     {
         $filter_params = [];
@@ -30,6 +28,11 @@ class Form extends View
         return filter_input_array(INPUT_POST, $filter_params);
     }
 
+    /**
+     * If form is submitted, filtered inputs are returned;
+     *
+     * @return bool
+     */
     public function isSubmitted(): bool
     {
         return (bool)$this->values();
@@ -43,7 +46,7 @@ class Form extends View
      */
     public function validateForm(): bool
     {
-        if(!$this->isSubmitted()) {
+        if (!$this->isSubmitted()) {
             return false;
         }
 
@@ -80,5 +83,20 @@ class Form extends View
         }
 
         return $is_valid;
+    }
+
+    /**
+     * Function is used for editing the values saved in the db file.
+     * It fills input space with value saved before.
+     *
+     * @param $values
+     */
+    public function fill($values)
+    {
+        foreach ($values as $value_id => $value) {
+            if (isset($this->data['fields'][$value_id])) {
+                $this->data['fields'][$value_id]['value'] = $value;
+            }
+        }
     }
 }

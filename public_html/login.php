@@ -12,8 +12,6 @@ if (App::$session->getUser()) {
     exit();
 }
 
-$navigation = new Navigation();
-
 $form = new LoginForm();
 
 if ($form->validateForm()) {

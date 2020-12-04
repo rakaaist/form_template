@@ -30,6 +30,9 @@ class Navigation extends View
                 'My' => [
                     'link' => '../admin/my.php'
                 ],
+                'List' => [
+                    'link' => '../admin/list.php'
+                ],
                 'Logout' => [
                     'link' => '../logout.php'
                 ]
