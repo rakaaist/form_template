@@ -22,7 +22,8 @@ if ($form->validateForm()) {
     $clean_inputs = $form->values();
     $clean_inputs['email'] = $_SESSION['email'];
     App::$db->updateRow('pixels', $id, $clean_inputs);
-    $message = 'Successful upload of pixel!';
+    header("Location: ../admin/list.php");
+    exit();
 }
 
 $page = new BasePage([

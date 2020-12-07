@@ -93,7 +93,8 @@ function validate_coordinate($filtered_input, &$field)
 //    return true;
 //}
 
-function validate_unique_pixel($filtered_input, &$form) {
+function validate_unique_pixel($filtered_input, &$form)
+{
     $pixel_unique = App::$db->getRowsWhere('pixels', [
         'coordinate_x' => $filtered_input['coordinate_x'],
         'coordinate_y' => $filtered_input['coordinate_y']
@@ -105,4 +106,9 @@ function validate_unique_pixel($filtered_input, &$form) {
 
     $form['error'] = 'This pixel is already chosen!';
     return false;
+}
+
+function validate_row_exists($field_input)
+{
+    return App::$db->rowExists('pixels', $field_input);
 }

@@ -149,3 +149,18 @@ table tfoot a{
     padding: 2px 8px;
     border-radius: 5px;
 }
+
+.form-delete {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 80px;
+    border: none;
+}
+
+.btn-delete {
+    max-width: 80px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}

@@ -2,8 +2,8 @@
 
 use App\App;
 use App\Views\BasePage;
-use App\Views\Navigation;
-use Core\View;
+use App\Views\Forms\Admin\DeleteForm;
+use Core\Views\Form;
 use Core\Views\Link;
 use Core\Views\Table;
 
@@ -14,16 +14,28 @@ if (!App::$session->getUser()) {
     exit();
 }
 
+if (Form::action()) {
+    $form = new DeleteForm();
+
+    if ($form->validateForm()) {
+        App::$db->deleteRow('pixels', $form->values()['row_id']);
+    }
+}
+
 $rows = App::$db->getRowsWhere('pixels', ['email' => $_SESSION['email']]);
 
 foreach ($rows as $row_id => &$row) {
     unset($row['email']);
+
     $link = new Link([
         'link' => "/admin/edit.php?id=$row_id",
         'text' => 'Edit'
     ]);
 
+    $form = new DeleteForm();
+    $form->fill(['row_id' => $row_id]);
     $row['link'] = $link->render();
+    $row['delete'] = $form->render();
 }
 
 $table = new Table(
@@ -33,7 +45,8 @@ $table = new Table(
             'X',
             'Y',
             'Color',
-            'Link'
+            'Link',
+            'Delete'
         ]
     ]
 );
