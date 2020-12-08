@@ -1,36 +1,12 @@
 <?php
 
-use App\App;
-use App\Views\BasePage;
-use App\Views\Forms\Admin\EditForm;
+use App\Controllers\Admin\PixelController;
 
 require '../../bootloader.php';
 
-if (!App::$session->getUser()) {
-    header("location: /login.php");
-    exit();
-}
+$controller = new PixelController();
 
-$id = $_GET['id'] ?? null;
-$row = App::$db->getRowById('pixels', $id);
-unset($row['email']);
+print $controller->indexEdit();
 
-$form = new EditForm();
-$form->fill($row);
 
-if ($form->validateForm()) {
-    $clean_inputs = $form->values();
-    $clean_inputs['email'] = $_SESSION['email'];
-    App::$db->updateRow('pixels', $id, $clean_inputs);
-    header("Location: ../admin/list.php");
-    exit();
-}
-
-$page = new BasePage([
-    'title' => 'Edit',
-    'content' => $form->render()
-]);
-
-print $page->render();
-?>
 

@@ -19,7 +19,8 @@ class RegisterForm extends Form
                         'type' => 'email',
                         'validators' => [
                             'validate_field_not_empty',
-                            'validate_user_unique'
+                            'validate_user_unique',
+                            'validate_email'
                         ]
                     ],
                     'password' => [

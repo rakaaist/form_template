@@ -20,14 +20,11 @@ class App
         self::$db->load();
         self::$session = new Session();
         self::$tracker = new Tracker();
-
-        var_dump('class constructor');
     }
 
     public function __destruct()
     {
         self::$db->save();
-        var_dump('class destructor');
     }
 
 }

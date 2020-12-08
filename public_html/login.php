@@ -1,30 +1,9 @@
 <?php
 
-use App\App;
-use App\Views\BasePage;
-use App\Views\Forms\LoginForm;
-use App\Views\Navigation;
+use App\Controllers\LoginController;
 
 require '../bootloader.php';
 
-if (App::$session->getUser()) {
-    header("location: /index.php");
-    exit();
-}
+$controller = new LoginController();
 
-$form = new LoginForm();
-
-if ($form->validateForm()) {
-    $clean_inputs = $form->values();
-    App::$session->login($clean_inputs['email'], $clean_inputs['password']);
-    header("location: /admin/add.php");
-}
-
-$page = new BasePage([
-    'title' => 'Login',
-    'content' => $form->render()
-]);
-
-print $page->render();
-?>
-
+print $controller->index();

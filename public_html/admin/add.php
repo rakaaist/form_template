@@ -1,33 +1,9 @@
 <?php
 
-use App\App;
-use App\Views\BasePage;
-use App\Views\Forms\Admin\AddForm;
-use App\Views\Navigation;
+use App\Controllers\Admin\PixelController;
 
 require '../../bootloader.php';
 
-if (!App::$session->getUser()) {
-    header("location: /login.php");
-    exit();
-}
+$controller = new PixelController();
 
-$form = new AddForm();
-
-
-if ($form->validateForm()) {
-    $clean_inputs = $form->values();
-
-    $clean_inputs['email'] = $_SESSION['email'];
-    App::$db->insertRow('pixels', $clean_inputs);
-    $message = 'Successful upload of pixel!';
-}
-
-$page = new BasePage([
-    'title' => 'Register',
-    'content' => $form->render()
-]);
-
-print $page->render();
-?>
-
+print $controller->indexAdd();
