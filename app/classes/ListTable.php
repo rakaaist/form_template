@@ -19,7 +19,7 @@ class ListTable extends Table
             unset($row['email']);
 
             $link = new Link([
-                'link' => "/admin/edit.php?id=$row_id",
+                'link' => "/edit?id=$row_id",
                 'text' => 'Edit'
             ]);
 

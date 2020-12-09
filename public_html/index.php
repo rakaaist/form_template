@@ -1,10 +1,9 @@
 <?php
 
-use App\Controllers\HomeController;
+use App\App;
 
 require '../bootloader.php';
 
-$controller = new HomeController();
+$app = new App();
 
-print $controller->index();
-
+$app->run();

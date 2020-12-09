@@ -3,6 +3,7 @@
 namespace App;
 
 use Core\FileDB;
+use Core\Router;
 use Core\Session;
 
 /**
@@ -10,9 +11,10 @@ use Core\Session;
  */
 class App
 {
-    public static $db;
-    public static $session;
-    public static $tracker;
+    public static FileDB $db;
+    public static Session $session;
+    public static Tracker $tracker;
+    public static Router $router;
 
     public function __construct()
     {
@@ -20,6 +22,12 @@ class App
         self::$db->load();
         self::$session = new Session();
         self::$tracker = new Tracker();
+        self::$router = new Router();
+    }
+
+    public function run()
+    {
+        print self::$router::run();
     }
 
     public function __destruct()

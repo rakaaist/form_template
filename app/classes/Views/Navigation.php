@@ -22,31 +22,31 @@ class Navigation extends View
         if (App::$session->getUser()) {
             return [
                 'Home' => [
-                    'link' => '../index.php'
+                    'link' => '../index'
                 ],
                 'Add' => [
-                    'link' => '../admin/add.php'
+                    'link' => '../add'
                 ],
                 'My' => [
-                    'link' => '../admin/my.php'
+                    'link' => '../my'
                 ],
                 'List' => [
-                    'link' => '../admin/list.php'
+                    'link' => '../list'
                 ],
                 'Logout' => [
-                    'link' => '../logout.php'
+                    'link' => '../logout'
                 ]
             ];
         } else {
             return [
                 'Home' => [
-                    'link' => '../index.php'
+                    'link' => '../index'
                 ],
                 'Register' => [
-                    'link' => '../register.php'
+                    'link' => '../register'
                 ],
                 'Login' => [
-                    'link' => '../login.php'
+                    'link' => '../login'
                 ]
             ];
         }

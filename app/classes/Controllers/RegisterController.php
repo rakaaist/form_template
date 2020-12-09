@@ -29,7 +29,7 @@ class RegisterController extends GuestController
             $clean_inputs = $this->form->values();
             unset($clean_inputs['password_repeat']);
             App::$db->insertRow('users', $clean_inputs);
-            header("location: /login.php");
+            header("location: /login");
         }
 
         $this->page->setContent($this->form->render());

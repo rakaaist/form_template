@@ -46,7 +46,7 @@ class PixelController extends AuthController
             $clean_inputs = $this->formEdit->values();
             $clean_inputs['email'] = $_SESSION['email'];
             App::$db->updateRow('pixels', $id, $clean_inputs);
-            header("Location: ../admin/list.php");
+            header("Location: ../list");
             exit();
         }
 

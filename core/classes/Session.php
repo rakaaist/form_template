@@ -6,8 +6,7 @@ use App\App;
 
 class Session
 {
-//    private ?array $user = null;
-    private $user;
+    private ?array $user = null;
 
     /**
      * Session constructor.
@@ -83,7 +82,7 @@ class Session
         session_destroy();
 
         if ($redirected) {
-            header("location: /$redirected");
+            header("location: $redirected");
         }
     }
 

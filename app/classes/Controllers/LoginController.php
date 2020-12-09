@@ -26,7 +26,7 @@ class LoginController extends GuestController
         if ($this->form->validateForm()) {
             $clean_inputs = $this->form->values();
             App::$session->login($clean_inputs['email'], $clean_inputs['password']);
-            header("location: /admin/add.php");
+            header("location: /add");
         }
 
         $this->page->setContent($this->form->render());

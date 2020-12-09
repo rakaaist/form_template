@@ -11,5 +11,4 @@ require 'core/functions/file.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/html.php';
 require 'vendor/autoload.php';
-
-$app = new App();
+require 'app/config/routes.php';

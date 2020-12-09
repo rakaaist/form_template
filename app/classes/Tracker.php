@@ -82,4 +82,8 @@ class Tracker
         return App::$db->getRowsWhere('tracker', ['session_id' => $user_session_id]) ?? [];
     }
 
+    public function run()
+    {
+    }
+
 }
